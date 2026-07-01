@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>표준 용액 제조 계산기</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>표준 용액(Stock Solution) 제조 계산기</h1>
+    <p class="note">※ 모든 밀도 값은 대기압(1 atm), 섭씨 20도(20°C) 기준입니다.</p>
+
+    <form id="calc-form">
+        <label for="salt">제조할 용액</label>
+        <select id="salt" name="salt">
+            {% for key, salt in salts.items() %}
+            <option value="{{ key }}">{{ salt.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="conc_value">원하는 몰농도</label>
+        <div class="input-row">
+            <input type="number" id="conc_value" step="any" min="0" placeholder="예: 1" required>
+            <select id="conc_unit" name="conc_unit">
+                {% for key, opt in conc_units.items() %}
+                <option value="{{ key }}">{{ opt.label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <label for="volume_value">만들고자 하는 용액의 부피</label>
+        <div class="input-row">
+            <input type="number" id="volume_value" step="any" min="0" placeholder="예: 100" required>
+            <select id="volume_unit" name="volume_unit">
+                {% for key, opt in volume_units.items() %}
+                <option value="{{ key }}">{{ opt.label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <label for="water_unit">증류수 결과 표시 단위</label>
+        <select id="water_unit" name="water_unit">
+            {% for key, label in water_units.items() %}
+            <option value="{{ key }}">{{ label }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">계산하기</button>
+    </form>
+
+    <div id="result" class="result hidden"></div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

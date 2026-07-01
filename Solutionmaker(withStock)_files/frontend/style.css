@@ -1,0 +1,161 @@
+/*
+  style.css
+  ------------------------------------------------------------
+  화면을 꾸며주는 파일입니다. (색깔, 여백, 배치 등)
+  기능(계산)에는 영향이 없고, 순수하게 "예쁘게 보이도록" 만드는 역할만 합니다.
+  ------------------------------------------------------------
+*/
+
+/* 페이지 전체 배경과 기본 글꼴 */
+body {
+    font-family: "Segoe UI", "Malgun Gothic", sans-serif;
+    background: #f2f4f7;
+    display: flex;
+    justify-content: center;
+    padding: 40px 16px;
+    margin: 0;
+}
+
+/* 화면 가운데 있는 흰색 카드(전체 내용을 감싸는 박스) */
+.card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    padding: 32px;
+    width: 100%;
+    max-width: 480px;
+}
+
+h1 {
+    font-size: 22px;
+    margin: 0 0 8px;
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.note {
+    text-align: center;
+    color: #999;
+    font-size: 11px;
+    margin-bottom: 24px;
+}
+
+/* 이미지 속 공식을 그대로 표현한 영역 */
+.formula-box {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 24px;
+    font-size: 13px;
+}
+
+.formula-vars p {
+    margin: 4px 0;
+}
+
+.formula-eq {
+    margin-top: 12px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* 분수 표현 (yz 위, x 아래, 가운데 줄) */
+.fraction {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.numerator {
+    border-bottom: 2px solid #333;
+    padding: 0 4px 2px;
+}
+
+.denominator {
+    padding: 2px 4px 0;
+}
+
+/* 이미지와 동일하게 변수마다 색을 다르게 표시 */
+.x { color: #e5533d; }   /* stock 농도 : 빨강 */
+.y { color: #2e9e5b; }   /* working 농도 : 초록 */
+.z { color: #6b8ee0; }   /* working 부피 : 파랑 */
+.n { color: #333; }      /* 필요한 stock 부피(N) : 검정 */
+
+/* 입력 폼 영역 */
+.field {
+    margin-bottom: 16px;
+}
+
+.field label {
+    display: block;
+    font-size: 13px;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+.input-row {
+    display: flex;
+    gap: 8px;
+}
+
+.input-row input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.input-row select {
+    padding: 10px 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #fff;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    background: #4b6bfb;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #3a56d4;
+}
+
+/* 결과/오류 메시지 표시 영역 */
+.result {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 15px;
+    min-height: 20px;
+    white-space: pre-line; /* \n(줄바꿈 문자)을 실제 줄바꿈으로 보이게 함 */
+}
+
+.result.success {
+    color: #1a7f4a;
+    font-weight: 700;
+}
+
+.result.error {
+    color: #c0362c;
+}

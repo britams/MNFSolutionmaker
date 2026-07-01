@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--
+  index.html
+  ------------------------------------------------------------
+  이 파일은 웹 브라우저에 실제로 보여지는 "화면"입니다.
+  - HTML : 화면에 어떤 글자/입력창/버튼이 있는지 뼈대를 만듭니다.
+  - style.css : 화면을 예쁘게 꾸며줍니다. (frontend/style.css)
+  - script.js : 버튼을 눌렀을 때 실제 동작(서버에 계산 요청)을 담당합니다. (frontend/script.js)
+  ------------------------------------------------------------
+-->
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>몰 농도 희석 계산기</title>
+    <!-- style.css 파일을 이 화면에 연결합니다. -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="card">
+        <h1>몰 농도 희석 계산기</h1>
+        <p class="subtitle">
+            진한 stock solution 으로 원하는 농도의 working solution 을 만들 때,<br>
+            stock solution 과 증류수가 각각 얼마나 필요한지 계산해줍니다.
+        </p>
+        <p class="note">※ g 단위 계산에 쓰이는 모든 밀도 값은 대기압(1 atm), 섭씨 20도(20°C) 기준입니다.</p>
+
+        <!-- 공식 설명 영역: 이미지 속 공식을 그대로 화면에도 보여줍니다. -->
+        <div class="formula-box">
+            <div class="formula-vars">
+                <p><span class="x">stock solution 몰 농도</span> : <b class="x">x</b> M</p>
+                <p><span class="y">working solution 몰 농도</span> : <b class="y">y</b> M</p>
+                <p><span class="z">만들려는 working solution 양</span> : <b class="z">z</b> L</p>
+                <p><span class="n">필요한 stock solution 양</span> : <b class="n">N</b> L</p>
+            </div>
+            <div class="formula-eq">
+                <span class="n">N</span> L =
+                <span class="fraction">
+                    <span class="numerator"><span class="y">y</span><span class="z">z</span></span>
+                    <span class="denominator x">x</span>
+                </span>
+            </div>
+        </div>
+
+        <!-- 실제 값을 입력하는 폼(양식) -->
+        <form id="calc-form">
+
+            <!-- 제조할 염류 선택: 결과를 g(질량) 단위로 볼 때 몰질량/밀도 계산에 사용됩니다. -->
+            <div class="field">
+                <label>제조할 용액</label>
+                <select id="salt">
+                    <option value="NaCl" selected>NaCl</option>
+                    <option value="Na2SO4">Na2SO4</option>
+                    <option value="KCl">KCl</option>
+                    <option value="K2SO4">K2SO4</option>
+                    <option value="LiCl">LiCl</option>
+                    <option value="Li2SO4">Li2SO4</option>
+                </select>
+            </div>
+
+            <!-- stock 농도 입력 -->
+            <div class="field">
+                <label>stock solution 농도 (x)</label>
+                <div class="input-row">
+                    <input type="number" id="stockConc" step="any" min="0" placeholder="예: 10" required>
+                    <select id="stockConcUnit">
+                        <option value="M">M</option>
+                        <option value="mM" selected>mM</option>
+                        <option value="uM">uM</option>
+                        <option value="nM">nM</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- working solution 농도 입력 -->
+            <div class="field">
+                <label>만들려는 working solution 농도 (y)</label>
+                <div class="input-row">
+                    <input type="number" id="workingConc" step="any" min="0" placeholder="예: 100" required>
+                    <select id="workingConcUnit">
+                        <option value="M">M</option>
+                        <option value="mM">mM</option>
+                        <option value="uM" selected>uM</option>
+                        <option value="nM">nM</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- working solution 부피 입력 -->
+            <div class="field">
+                <label>만들려는 working solution 양 (z)</label>
+                <div class="input-row">
+                    <input type="number" id="workingVolume" step="any" min="0" placeholder="예: 7" required>
+                    <select id="workingVolumeUnit">
+                        <option value="L">L</option>
+                        <option value="mL" selected>mL</option>
+                        <option value="uL">uL</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 결과 표시 단위 선택: 필요한 stock 양 / 필요한 증류수 양을 각각 L, mL, g 중에서 고를 수 있습니다. -->
+            <div class="field">
+                <label>필요한 stock solution 결과 단위</label>
+                <select id="stockOutUnit">
+                    <option value="L">L</option>
+                    <option value="mL" selected>mL</option>
+                    <option value="g">g</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>필요한 증류수 결과 단위</label>
+                <select id="waterOutUnit">
+                    <option value="L">L</option>
+                    <option value="mL" selected>mL</option>
+                    <option value="g">g</option>
+                </select>
+            </div>
+
+            <button type="submit">계산하기</button>
+        </form>
+
+        <!-- 계산 결과 또는 오류 메시지가 표시되는 영역 -->
+        <div id="result" class="result"></div>
+    </div>
+
+    <!-- script.js 를 화면 맨 아래에서 불러옵니다.
+         (HTML 요소들이 다 만들어진 뒤에 자바스크립트가 실행되도록 하기 위함) -->
+    <script src="script.js"></script>
+</body>
+</html>
