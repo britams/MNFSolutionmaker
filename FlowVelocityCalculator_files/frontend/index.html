@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--
+  index.html
+  ------------------------------------------------------------
+  연속방정식(Q = A x V)을 이용해 유속/유량을 계산하는 화면입니다.
+  ------------------------------------------------------------
+-->
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>유속 계산기 (연속방정식)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="card">
+        <h1>유속 계산기</h1>
+        <p class="subtitle">
+            연속방정식 Q = A &times; V 를 이용해서,<br>
+            유속(m/s, mm/s)과 유량(uL/s, uL/min)을 서로 변환합니다.
+        </p>
+
+        <form id="calc-form">
+
+            <!-- 단면적 계산 방식 선택 -->
+            <div class="field">
+                <label>단면적(A) 계산 방식</label>
+                <div class="radio-row">
+                    <label class="radio-option">
+                        <input type="radio" name="areaMode" value="syringe" checked>
+                        주사기 선택
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="areaMode" value="channel">
+                        채널 (width &times; height)
+                    </label>
+                </div>
+            </div>
+
+            <!-- 주사기 선택 (areaMode = syringe 일 때) -->
+            <div class="field" id="syringeFields">
+                <label>주사기 종류</label>
+                <select id="syringe">
+                    <option value="1ml">1 ml</option>
+                    <option value="3ml">3 ml</option>
+                    <option value="5ml">5 ml</option>
+                    <option value="10ml" selected>10 ml</option>
+                    <option value="20ml">20 ml</option>
+                    <option value="30ml">30 ml</option>
+                    <option value="50/60ml">50 / 60 ml</option>
+                </select>
+            </div>
+
+            <!-- 채널 크기 입력 (areaMode = channel 일 때) -->
+            <div class="field hidden" id="channelFields">
+                <label>채널 크기</label>
+                <div class="input-row">
+                    <input type="number" id="channelWidth" step="any" min="0" placeholder="width">
+                    <input type="number" id="channelHeight" step="any" min="0" placeholder="height">
+                    <select id="channelUnit">
+                        <option value="cm">cm</option>
+                        <option value="mm" selected>mm</option>
+                        <option value="um">um</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 입력값 (아는 값) -->
+            <div class="field">
+                <label>입력값 (아는 값)</label>
+                <div class="input-row">
+                    <input type="number" id="inputValue" step="any" min="0" placeholder="예: 50" required>
+                    <select id="inputUnit">
+                        <option value="m/s">m/s</option>
+                        <option value="mm/s">mm/s</option>
+                        <option value="uL/s">uL/s</option>
+                        <option value="uL/min" selected>uL/min</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 출력 단위 -->
+            <div class="field">
+                <label>결과 단위</label>
+                <select id="outputUnit">
+                    <option value="m/s">m/s</option>
+                    <option value="mm/s" selected>mm/s</option>
+                    <option value="uL/s">uL/s</option>
+                    <option value="uL/min">uL/min</option>
+                </select>
+            </div>
+
+            <button type="submit">계산하기</button>
+        </form>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

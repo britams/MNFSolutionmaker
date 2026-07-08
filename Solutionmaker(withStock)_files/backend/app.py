@@ -13,14 +13,18 @@
 #      결과를 JSON(자바스크립트가 읽기 쉬운 데이터 형식)으로 돌려준다.
 # ------------------------------------------------------------------
 
-import os
-import sys
-import subprocess
-import tempfile
-import threading
-import time
-import webbrowser
+import os            # 파일 경로 조합, 폴더 확인, 환경변수(PROGRAMFILES 등) 읽기 등 "운영체제" 관련 기능
+import sys           # exe로 묶였는지(frozen) 확인하고, PyInstaller가 만든 임시 폴더(_MEIPASS) 경로를 알아낼 때 사용
+import subprocess    # 파이썬 코드에서 다른 프로그램(여기서는 Edge/Chrome 브라우저)을 새 프로세스로 실행할 때 사용
+import tempfile      # 브라우저 전용 임시 프로필 폴더를 만들 때, OS의 임시 폴더 경로를 가져오는 데 사용
+import threading     # Flask 서버를 "별도의 스레드"에서 실행해서, 동시에 브라우저도 띄울 수 있게 해줌
+import time          # 서버가 완전히 켜질 때까지 잠깐 기다리는 용도(time.sleep)
+import webbrowser    # 컴퓨터의 기본 웹 브라우저로 특정 주소(url)를 열어주는 파이썬 표준 라이브러리
 from flask import Flask, request, jsonify, send_from_directory
+# Flask                  : 파이썬으로 웹 서버를 만들게 해주는 핵심 라이브러리 (이 앱의 "서버 몸통")
+# request                : 브라우저(프론트엔드)가 보낸 요청 데이터(JSON 등)를 읽을 때 사용
+# jsonify                : 파이썬 딕셔너리(dict)를 JSON 형식으로 바꿔서 브라우저에 응답으로 보낼 때 사용
+# send_from_directory    : frontend 폴더 안의 html/css/js 같은 "파일 그대로"를 응답으로 보낼 때 사용
 
 # exe로 묶였을 때는(PyInstaller) frontend 파일들이 sys._MEIPASS라는 임시 폴더 안에 들어있고,
 # 그냥 python app.py로 실행할 때는 backend 옆의 frontend 폴더를 그대로 사용합니다.
