@@ -46,6 +46,7 @@ WATER_DENSITY = 0.998207  # 증류수 밀도 (g/mL, 20°C, 1 atm)
 
 # 제조/희석에 사용할 염류 목록. molar_mass(g/mol)와 density(g/mL)는 "고체 상태" 염류의 값입니다.
 # -> g 단위 변환(부피 <-> 질량)을 할 때, 녹아있는 염류가 실제로 차지하는 부피를 계산하는 데 사용됩니다.
+# 1 cm³ = 1 mL
 SALTS = {
     "NaCl":    {"molar_mass": 58.442769,  "density": 2.165000},
     "Na2SO4":  {"molar_mass": 142.042138, "density": 2.664000},
@@ -53,6 +54,7 @@ SALTS = {
     "K2SO4":   {"molar_mass": 174.259200, "density": 2.662000},
     "LiCl":    {"molar_mass": 42.394000,  "density": 2.068000},
     "Li2SO4":  {"molar_mass": 109.944600, "density": 2.221000},
+    "H2Li2O5S":{"molar_mass": 127.96, "density": 2.06},
 }
 
 # ------------------------------------------------------------------

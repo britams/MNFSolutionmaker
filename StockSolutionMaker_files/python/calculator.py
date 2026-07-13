@@ -20,6 +20,7 @@ SALTS = {
     "4": {"name": "K2SO4", "molar_mass": 174.259200, "density": 2.662000},
     "5": {"name": "LiCl", "molar_mass": 42.394000, "density": 2.068000},
     "6": {"name": "Li2SO4", "molar_mass": 109.944600, "density": 2.221000},
+    "7": {"name": "H2Li2O5S", "molar_mass": 127.96, "density": 2.06},
 }
 
 # 농도/부피 단위 변환표.
